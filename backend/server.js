@@ -90,6 +90,37 @@ app.get("/api/tasks/:id", async (req, res) => {
 
 // ...existing code...
 
+// ...existing code...
+
+app.post("/api/tasks", async (req, res) => {
+    const { title, description } = req.body;
+
+    if (!title || title.trim() === "") {
+        return res.status(400).json({
+            message: "Title is required"
+        });
+    }
+
+    try {
+        const result = await pool.query(
+            `INSERT INTO tasks (title, description)
+             VALUES ($1, $2)
+             RETURNING id, title, description, completed, created_at`,
+            [title.trim(), description || null]
+        );
+
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error("Error creating task:", error);
+
+        res.status(500).json({
+            message: "Failed to create task"
+        });
+    }
+});
+
+// ...existing code...
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

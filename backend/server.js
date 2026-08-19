@@ -53,6 +53,42 @@ app.get("/api/tasks", async (req, res) => {
 });
 
 // ...existing code...
+// ...existing code...
+
+app.get("/api/tasks/:id", async (req, res) => {
+    const { id } = req.params;
+
+    if (!Number.isInteger(Number(id))) {
+        return res.status(400).json({
+            message: "Task ID must be a number"
+        });
+    }
+
+    try {
+        const result = await pool.query(
+            `SELECT id, title, description, completed, created_at
+             FROM tasks
+             WHERE id = $1`,
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message: "Task not found"
+            });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error("Error fetching task:", error);
+
+        res.status(500).json({
+            message: "Failed to fetch task"
+        });
+    }
+});
+
+// ...existing code...
 
 const PORT = process.env.PORT || 5000;
 

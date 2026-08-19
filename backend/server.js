@@ -211,7 +211,43 @@ app.put("/api/tasks/:id", async (req, res) => {
 
 // ...existing code...
 
+// ...existing code...
 
+app.delete("/api/tasks/:id", async (req, res) => {
+    const { id } = req.params;
+
+    if (!Number.isInteger(Number(id))) {
+        return res.status(400).json({
+            message: "Task ID must be a number"
+        });
+    }
+
+    try {
+        const result = await pool.query(
+            "DELETE FROM tasks WHERE id = $1 RETURNING id",
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message: "Task not found"
+            });
+        }
+
+        res.json({
+            message: "Task deleted successfully",
+            id: result.rows[0].id
+        });
+    } catch (error) {
+        console.error("Error deleting task:", error);
+
+        res.status(500).json({
+            message: "Failed to delete task"
+        });
+    }
+});
+
+// ...existing code...
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,0 +1,189 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef2ff;
+    color: #172033;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+.app {
+    min-height: 100vh;
+    padding: 40px 16px;
+}
+
+.container {
+    width: min(850px, 100%);
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    margin: 0 0 8px;
+    color: #3730a3;
+    font-size: 38px;
+}
+
+.header p {
+    margin: 0;
+    color: #64748b;
+}
+
+.task-form,
+.task-card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 5px 20px rgb(15 23 42 / 10%);
+}
+
+.task-form h2,
+.section-heading h2 {
+    margin-top: 0;
+}
+
+.task-form input,
+.task-form textarea {
+    width: 100%;
+    display: block;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+}
+
+.task-form input:focus,
+.task-form textarea:focus {
+    border-color: #4f46e5;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.primary-button,
+.secondary-button,
+.task-actions button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: white;
+}
+
+.primary-button {
+    background: #4f46e5;
+}
+
+.secondary-button {
+    background: #64748b;
+}
+
+.message {
+    padding: 12px;
+    color: #166534;
+    text-align: center;
+}
+
+.tasks-section {
+    margin-top: 30px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-heading span {
+    color: #64748b;
+}
+
+.task-list {
+    display: grid;
+    gap: 16px;
+}
+
+.task-card {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.task-content {
+    min-width: 0;
+}
+
+.task-content h3 {
+    margin: 0 0 8px;
+    color: #1e293b;
+    overflow-wrap: anywhere;
+}
+
+.task-content p {
+    margin: 0;
+    color: #64748b;
+    overflow-wrap: anywhere;
+}
+
+.completed h3,
+.completed p {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
+
+.task-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.task-actions button {
+    background: #2563eb;
+}
+
+.task-actions .delete-button {
+    background: #dc2626;
+}
+
+.empty {
+    padding: 30px;
+    background: white;
+    border-radius: 14px;
+    text-align: center;
+    color: #64748b;
+}
+
+@media (max-width: 600px) {
+    .task-card {
+        display: block;
+    }
+
+    .task-actions {
+        justify-content: stretch;
+        margin-top: 18px;
+    }
+
+    .task-actions button {
+        flex: 1;
+    }
+}

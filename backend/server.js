@@ -32,6 +32,28 @@ app.get("/api/test-db", async (req, res) => {
     }
 });
 
+// ...existing code...
+
+app.get("/api/tasks", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT id, title, description, completed, created_at
+            FROM tasks
+            ORDER BY created_at DESC
+        `);
+
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching tasks:", error);
+
+        res.status(500).json({
+            message: "Failed to fetch tasks"
+        });
+    }
+});
+
+// ...existing code...
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
